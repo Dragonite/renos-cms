@@ -14,7 +14,7 @@ class ToolCategory(models.Model):
 class Tool(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
-    image = models.ImageField(upload_to='tools/')
+    image = models.ImageField(upload_to='tools/', blank=True, null=True)
     link = models.URLField()
     category = models.ForeignKey(ToolCategory, on_delete=models.CASCADE, related_name='tools')
     
