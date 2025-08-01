@@ -24,6 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/tools/', include('general.urls')),
     path('api/important-links/', ImportantLinksListView.as_view(), name='important-links'),
+    path('api/testing-accounts/', include('technical_information.urls')),
 ]
 
 if settings.DEBUG:
