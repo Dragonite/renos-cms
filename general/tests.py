@@ -1,5 +1,4 @@
 from django.test import TestCase
-from django.core.files.uploadedfile import SimpleUploadedFile
 from django.urls import reverse
 from rest_framework.test import APITestCase
 from rest_framework import status
@@ -10,14 +9,13 @@ from .serializers import ToolSerializer, ToolCategorySerializer, ImportantLinksS
 class ToolSerializerTest(TestCase):
     def setUp(self):
         self.category = ToolCategory.objects.create(name="Development Tools")
-        self.tool_data = {
-            'name': 'Test Tool',
-            'description': 'A test tool for development',
-            'image': SimpleUploadedFile("test_image.jpg", b"file_content", content_type="image/jpeg"),
-            'link': 'https://example.com',
-            'category': self.category
-        }
-        self.tool = Tool.objects.create(**self.tool_data)
+        self.tool = Tool.objects.create(
+            name='Test Tool',
+            description='A test tool for development',
+            link='https://example.com',
+            category=self.category
+            # image field left blank/null
+        )
 
     def test_tool_serializer_fields(self):
         serializer = ToolSerializer(instance=self.tool)
@@ -65,17 +63,17 @@ class ToolCategorySerializerTest(TestCase):
         self.tool1 = Tool.objects.create(
             name='Tool 1',
             description='First tool',
-            image=SimpleUploadedFile("tool1.jpg", b"file_content", content_type="image/jpeg"),
             link='https://tool1.com',
             category=self.category
+            # image field left blank/null
         )
         
         self.tool2 = Tool.objects.create(
             name='Tool 2',
             description='Second tool',
-            image=SimpleUploadedFile("tool2.jpg", b"file_content", content_type="image/jpeg"),
             link='https://tool2.com',
             category=self.category
+            # image field left blank/null
         )
 
     def test_tool_category_serializer_fields(self):

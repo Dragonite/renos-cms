@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(python manage.py:*)",
-      "Bash(uv run:*)"
+      "Bash(uv run:*)",
+      "Bash(find:*)",
+      "Bash(ls:*)"
     ],
     "deny": []
   }
