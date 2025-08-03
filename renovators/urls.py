@@ -18,13 +18,14 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from general.views import ImportantLinksListView
+from general.views import ImportantLinksListView, TeamMemberListView
 from technical_information.views import SyntheticEventsListView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/tools/', include('general.urls')),
     path('api/important-links/', ImportantLinksListView.as_view(), name='important-links'),
+    path('api/team-members/', TeamMemberListView.as_view(), name='team-members'),
     path('api/testing-accounts/', include('technical_information.urls')),
     path('api/synthetic-events/', SyntheticEventsListView.as_view(), name='synthetic-events'),
 ]

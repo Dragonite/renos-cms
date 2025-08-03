@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import ToolCategory, Tool, LinkCategory, ImportantLinks
+from .models import ToolCategory, Tool, LinkCategory, ImportantLinks, Role, TeamMember
 
 
 class ToolSerializer(serializers.ModelSerializer):
@@ -28,3 +28,17 @@ class LinkCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = LinkCategory
         fields = ['id', 'name', 'important_links']
+
+
+class RoleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Role
+        fields = ['id', 'name']
+
+
+class TeamMemberSerializer(serializers.ModelSerializer):
+    role = RoleSerializer(read_only=True)
+    
+    class Meta:
+        model = TeamMember
+        fields = ['id', 'name', 'email', 'contact_number', 'image', 'role']

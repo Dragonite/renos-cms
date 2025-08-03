@@ -1,7 +1,7 @@
 from rest_framework import generics
 from rest_framework.response import Response
-from .models import ToolCategory, LinkCategory
-from .serializers import ToolCategorySerializer, LinkCategorySerializer
+from .models import ToolCategory, LinkCategory, TeamMember
+from .serializers import ToolCategorySerializer, LinkCategorySerializer, TeamMemberSerializer
 
 
 class ToolCategoryListView(generics.ListAPIView):
@@ -22,3 +22,8 @@ class ImportantLinksListView(generics.ListAPIView):
             result[category_data['name']] = category_data['important_links']
         
         return Response(result)
+
+
+class TeamMemberListView(generics.ListAPIView):
+    queryset = TeamMember.objects.select_related('role').all()
+    serializer_class = TeamMemberSerializer

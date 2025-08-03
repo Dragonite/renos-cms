@@ -42,3 +42,21 @@ class ImportantLinks(models.Model):
     
     class Meta:
         verbose_name_plural = "Important Links"
+
+
+class Role(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    
+    def __str__(self):
+        return self.name
+
+
+class TeamMember(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    contact_number = models.CharField(max_length=20)
+    image = models.ImageField(upload_to='team_members/', blank=True, null=True)
+    role = models.ForeignKey(Role, on_delete=models.CASCADE, related_name='team_members')
+    
+    def __str__(self):
+        return self.name
